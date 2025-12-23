@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  background: #121212;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+* {
+  image-rendering: pixelated;
+}
+
+/* HUD */
+.hud {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 20px;
+}
+
+/* 게임 */
+#game {
+  margin-top: 140px;
+}
+
+/* 트레일러 (기준 컨테이너) */
+#trailer {
+  position: relative;
+  width: calc(64px * 5 + 12px * 4);
+  margin: 0 auto;
+}
+
+
+/* 물건 슬롯 */
+#items {
+  display: grid;
+  grid-template-columns: repeat(5, 64px);
+  gap: 12px;
+}
+
+/* 물건 */
+.item {
+    position: relative;
+  z-index: 2;
+  width: 64px;
+  height: 64px;
+  background-size: cover;
+  transition: transform 0.25s ease;
+}
+
+/* 산타 – 오른쪽 끝 슬롯 위에 고정 */
+#santa {
+  position: absolute;
+  z-index: 1;
+  right: -30px;
+  top: -90px;
+  width: 120px;
+  height: 120px;
+  background: url("assets/santa_idle.png") no-repeat center;
+  background-size: cover;
+}
+
+/* 오른쪽으로 밀리는 애니메이션 */
+.move {
+  transform: translateX(76px);
+}
+
+/* ===== wrap : 포장되어 사라짐 ===== */
+.item.wrap {
+  animation: wrapOut 0.2s ease-out forwards;
+}
+
+@keyframes wrapOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* ===== discard : 날려버림 ===== */
+.item.discard {
+  animation: discardOut 0.3s ease-in forwards;
+}
+
+@keyframes discardOut {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(60px, -40px) rotate(120deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120px, -80px) rotate(240deg);
+    opacity: 0;
+  }
+}
